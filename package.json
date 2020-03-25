@@ -1,0 +1,31 @@
+{
+  "name": "@types/ipfs",
+  "private": true,
+  "version": "0.41.0",
+  "description": "TypeScript type definitions for js-ipfs and more",
+  "types": "types/ipfs/index.d.ts",
+  "keywords": [
+    "@types",
+    "typescript",
+    "ipfs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xmader/ipfs-types.git"
+  },
+  "author": "Xmader",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Xmader/ipfs-types/issues"
+  },
+  "homepage": "https://github.com/Xmader/ipfs-types#readme",
+  "dependencies": {
+    "@types/bignumber.js": "*",
+    "@types/bl": "*",
+    "@types/ipfs-repo": "git+https://github.com/232c/ipfs-repo-types.git",
+    "@types/multiaddr": "*",
+    "@types/node": "*",
+    "cids": "*",
+    "peer-id": "*"
+  }
+}

@@ -2,7 +2,8 @@
     "compilerOptions": {
         "module": "commonjs",
         "lib": [
-            "es2019"
+            "es2019",
+            "DOM"
         ],
         "noImplicitAny": true,
         "noImplicitThis": true,
@@ -13,12 +14,10 @@
         "typeRoots": [
             "../"
         ],
-        "types": [],
+        "types": [
+            "node"
+        ],
         "noEmit": true,
         "forceConsistentCasingInFileNames": true
     },
-    "files": [
-        "index.d.ts",
-        "ipfs-tests.ts"
-    ]
 }
