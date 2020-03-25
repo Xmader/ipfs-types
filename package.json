@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/Xmader/ipfs-types#readme",
   "dependencies": {
-    "@types/bignumber.js": "*",
     "@types/bl": "*",
     "@types/ipfs-repo": "git+https://github.com/232c/ipfs-repo-types.git",
     "@types/multiaddr": "*",
     "@types/node": "*",
+    "bignumber.js": "*",
     "cids": "*",
     "peer-id": "*"
   }
