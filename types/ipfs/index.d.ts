@@ -6,7 +6,7 @@
 import Repo from "ipfs-repo"
 import PeerId from "peer-id"
 
-import IPFSCoreAPIs from "interface-ipfs-core"
+import IPFSCoreAPIs from "../interface-ipfs-core"
 
 export as namespace ipfs
 
