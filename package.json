@@ -4,6 +4,9 @@
   "version": "0.41.0",
   "description": "TypeScript type definitions for js-ipfs and more",
   "types": "types/ipfs/index.d.ts",
+  "files": [
+    "types/**/*"
+  ],
   "keywords": [
     "@types",
     "typescript",
