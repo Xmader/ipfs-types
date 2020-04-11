@@ -42,7 +42,7 @@ interface PingOptions {
      * @type integer
      * @default 10
      */
-    count: number;
+    count?: number;
 }
 
 interface PingResponse {
@@ -56,12 +56,12 @@ interface ResolveOptions {
      * Resolve until the result is an IPFS name
      * @default false
      */
-    recursive: boolean;
+    recursive?: boolean;
 
     /**
      * Multibase codec name the CID in the resolved path will be encoded with
      */
-    cidBase: string | "base58btc";
+    cidBase?: string | "base58btc";
 }
 
 export interface MiscellaneousAPI {
