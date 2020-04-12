@@ -73,7 +73,7 @@ export interface MiscellaneousAPI {
     /**
      * An object with the version of the implementation, the commit and the Repo
      */
-    version(): Promise<Object>;
+    version(): Promise<any>;
 
     /**
      * Resolve DNS links
