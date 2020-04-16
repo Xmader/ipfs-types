@@ -5,7 +5,7 @@ import CID from 'cids'
 import BufferList from 'bl'
 import { Bytes, Bloby, FileContent, UnixTime, MTime, IPFSPath } from "./common"
 
-interface FileObject {
+export interface FileObject {
     /** The path you want to the file to be accessible at from the root CID _after_ it has been added */
     path?: string;
     /** The contents of the file (see below for definition) */
@@ -16,7 +16,7 @@ interface FileObject {
     mtime?: UnixTime;
 }
 
-interface IPFSAddOptions {
+export interface IPFSAddOptions {
     /** 
      * chunking algorithm used to build ipfs DAGs. Available formats:
      * - size-{size}
@@ -87,7 +87,7 @@ interface IPFSAddOptions {
     wrapWithDirectory?: boolean;
 }
 
-interface IPFSAddResultObject {
+export interface IPFSAddResultObject {
     path: string;
     cid: CID;
     mode: number;
@@ -95,19 +95,19 @@ interface IPFSAddResultObject {
     size: number;
 }
 
-interface IPFSCatOptions {
+export interface IPFSCatOptions {
     offset?: number;
     length?: number;
 }
 
-interface IPFSGetResultObject {
+export interface IPFSGetResultObject {
     path: string;
     content: AsyncIterable<BufferList>;
     mode: number;
     mtime: MTime;
 }
 
-interface IPFSLsResultObject {
+export interface IPFSLsResultObject {
     depth: number;
     name: string;
     path: string;

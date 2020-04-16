@@ -1,7 +1,7 @@
 
 import { IPFSPath } from './common'
 
-interface RefsOptions {
+export interface RefsOptions {
     /**
      * recursively list references of child nodes
      * @default false
@@ -37,7 +37,7 @@ interface RefsOptions {
     timeout: number | string;
 }
 
-interface RefsResultObject {
+export interface RefsResultObject {
     ref: string;
     err: Error | null;
 }

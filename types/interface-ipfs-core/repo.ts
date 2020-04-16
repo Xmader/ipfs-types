@@ -2,7 +2,7 @@
 import CID from "cids"
 import BigNumber from "bignumber.js"
 
-interface RepoGCOptions {
+export interface RepoGCOptions {
     /**
      * writes a minimal output
      */
@@ -14,7 +14,7 @@ interface RepoGCOptions {
     "stream-errors": boolean;
 }
 
-interface RepoGCResultObject {
+export interface RepoGCResultObject {
     /**
      * is an Error if it was not possible to GC a particular block
      */
@@ -26,14 +26,14 @@ interface RepoGCResultObject {
     cid?: CID;
 }
 
-interface RepoStatOptions {
+export interface RepoStatOptions {
     /**
      * output repoSize in MiB.
      */
     human?: boolean;
 }
 
-interface RepoStatResultObject {
+export interface RepoStatResultObject {
     numObjects: BigNumber;
     /**
      * in bytes if the `human` option is false

@@ -1,6 +1,6 @@
 
 
-interface KeyGenOptions {
+export interface KeyGenOptions {
     /**
      * the key type  
      * Note: js-ipfs will not support 'ed25519' until libp2p/js-libp2p-crypto#145 is resolved
@@ -16,7 +16,7 @@ interface KeyGenOptions {
 /**
  * An object that describes the key;
  */
-interface KeyInfo {
+export interface KeyInfo {
     /**
      * the name of the key  
      * (the local name for the key)
@@ -31,7 +31,7 @@ interface KeyInfo {
     id: string;
 }
 
-interface KeyRenameResult {
+export interface KeyRenameResult {
     /**
      * the hash of the key
      */

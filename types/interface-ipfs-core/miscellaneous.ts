@@ -1,7 +1,7 @@
 
 import Multiaddr from "multiaddr"
 
-interface IdResultObject {
+export interface IdResultObject {
     /**
      * the Peer ID
      */
@@ -28,7 +28,7 @@ interface IdResultObject {
     protocolVersion?: string
 }
 
-interface DNSOptions {
+export interface DNSOptions {
     /**
      * resolve until result is not a domain name
      * @default true
@@ -36,7 +36,7 @@ interface DNSOptions {
     recursive?: boolean;
 }
 
-interface PingOptions {
+export interface PingOptions {
     /**
      * the number of ping messages to send
      * @type integer
@@ -45,13 +45,13 @@ interface PingOptions {
     count?: number;
 }
 
-interface PingResponse {
+export interface PingResponse {
     success: boolean;
     time: number;
     text: "" | string;
 }
 
-interface ResolveOptions {
+export interface ResolveOptions {
     /**
      * Resolve until the result is an IPFS name
      * @default false

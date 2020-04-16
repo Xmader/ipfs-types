@@ -1,5 +1,5 @@
 
-interface NamePublishOptions {
+export interface NamePublishOptions {
     /**
      * Resolve given path before publishing.
      * @default true
@@ -32,7 +32,7 @@ interface NamePublishOptions {
 /**
  * An object that contains the IPNS hash and the IPFS hash
  */
-interface NamePublishResultObject {
+export interface NamePublishResultObject {
     /**
      * @example "/ipns/QmHash.."
      */
@@ -43,7 +43,7 @@ interface NamePublishResultObject {
     value: string;
 }
 
-interface NameResolveOptions {
+export interface NameResolveOptions {
     /**
      * Resolve until the result is not an IPNS name
      * @default false

@@ -3,7 +3,7 @@ import CID from 'cids'
 
 type PinType = "recursive" | "direct" | "indirect"
 
-interface PinAddOptions {
+export interface PinAddOptions {
     /**
      * Recursively pin the object linked.
      * @default true
@@ -18,14 +18,14 @@ interface PinAddOptions {
     timeout?: string | number;
 }
 
-interface PinLsOptions {
+export interface PinLsOptions {
     /**
      * filter by this type of pin
      */
     type?: PinType;
 }
 
-interface PinLsResultObject {
+export interface PinLsResultObject {
     /**
      * CID of the pinned node
      */
@@ -37,7 +37,7 @@ interface PinLsResultObject {
     type: PinType;
 }
 
-interface PinRmOptions {
+export interface PinRmOptions {
     /**
      * Recursively unpin the object linked.
      * @default true

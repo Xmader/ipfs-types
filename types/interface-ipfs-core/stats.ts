@@ -3,7 +3,7 @@ import BigNumber from "bignumber.js"
 import { BitswapStatAPI } from "./bitswap"
 import { RepoStatAPI } from "./repo"
 
-interface BandwidthStatOptions {
+export interface BandwidthStatOptions {
     /**
      * specifies a peer to print bandwidth for
      */
@@ -28,7 +28,7 @@ interface BandwidthStatOptions {
 /**
  * all numbers are in bytes
  */
-interface BandwidthStat {
+export interface BandwidthStat {
     totalIn: BigNumber;
     totalOut: BigNumber;
     rateIn: BigNumber;

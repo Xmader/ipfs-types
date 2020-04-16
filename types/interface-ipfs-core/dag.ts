@@ -1,7 +1,7 @@
 
 import CID from 'cids'
 
-interface DagPutOptions {
+export interface DagPutOptions {
     /**
      * The IPLD format multicodec
      * @default "dag-cbor"
@@ -26,14 +26,14 @@ interface DagPutOptions {
     pin?: boolean;
 }
 
-interface DagGetOptions {
+export interface DagGetOptions {
     /**
      * if set to true, it will avoid resolving through different objects.
      */
     localResolve?: boolean;
 }
 
-interface DagGetResultObject {
+export interface DagGetResultObject {
     /**
      * the value or node that was fetched during the get operation.
      */
@@ -45,7 +45,7 @@ interface DagGetResultObject {
     remainderPath: string;
 }
 
-interface DagTreeOptions {
+export interface DagTreeOptions {
     /**
      * if set to true, it will follow the links and continuously run tree on them, returning all the paths in the graph.
      */
