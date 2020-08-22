@@ -1,6 +1,7 @@
 
+import { CancellableOptions } from "./common"
 
-export interface KeyGenOptions {
+export interface KeyGenOptions extends CancellableOptions {
     /**
      * the key type  
      * Note: js-ipfs will not support 'ed25519' until libp2p/js-libp2p-crypto#145 is resolved
@@ -9,6 +10,7 @@ export interface KeyGenOptions {
 
     /**
      * the key size in bits
+     * @default 2048
      */
     size?: number;
 }
@@ -63,14 +65,14 @@ export interface KeyAPI {
      * List all the keys
      * @returns An array representing all the keys
      */
-    list(): Promise<KeyInfo[]>
+    list(options?: CancellableOptions): Promise<KeyInfo[]>
 
     /**
      * Remove a key
      * @param name the local name for the key
      * @returns An object that describes the removed key
      */
-    rm(name: string): Promise<KeyInfo>
+    rm(name: string, options?: CancellableOptions): Promise<KeyInfo>
 
     /**
      * Rename a key
@@ -78,7 +80,7 @@ export interface KeyAPI {
      * @param newName a new name for key
      * @returns An object that describes the renamed key
      */
-    rename(oldName: string, newName: string): Promise<KeyRenameResult>
+    rename(oldName: string, newName: string, options?: CancellableOptions): Promise<KeyRenameResult>
 
     /**
      * Export a key in a PEM encoded password protected PKCS #8
@@ -86,7 +88,7 @@ export interface KeyAPI {
      * @param password the password to protect the key
      * @returns The string representation of the key (PEM encoded)
      */
-    export(name: string, password: string): Promise<string>
+    export(name: string, password: string, options?: CancellableOptions): Promise<string>
 
     /**
      * Import a PEM encoded password protected PKCS #8 key
@@ -94,6 +96,6 @@ export interface KeyAPI {
      * @param pem the PEM encoded key
      * @param password the password that protects the PEM key
      */
-    import(name: string, pem: string, password: string): Promise<KeyInfo>
+    import(name: string, pem: string, password: string, options?: CancellableOptions): Promise<KeyInfo>
 }
 

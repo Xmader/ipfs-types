@@ -2,8 +2,9 @@
 import BigNumber from "bignumber.js"
 import { BitswapStatAPI } from "./bitswap"
 import { RepoStatAPI } from "./repo"
+import { CancellableOptions } from "./common"
 
-export interface BandwidthStatOptions {
+export interface BandwidthStatOptions extends CancellableOptions {
     /**
      * specifies a peer to print bandwidth for
      */

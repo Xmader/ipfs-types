@@ -1,7 +1,7 @@
 
-import { IPFSPath } from './common'
+import { IPFSPath, CancellableOptions } from './common'
 
-export interface RefsOptions {
+export interface RefsOptions extends CancellableOptions {
     /**
      * recursively list references of child nodes
      * @default false
@@ -30,11 +30,6 @@ export interface RefsOptions {
      * @default 1
      */
     maxDepth?: number;
-
-    /**
-     * Throw an error if the request does not complete within the specified milliseconds timeout. If timeout is a string, the value is parsed as a human readable duration. There is no timeout by default.
-     */
-    timeout: number | string;
 }
 
 export interface RefsResultObject {
@@ -51,5 +46,5 @@ export interface RefsAPI {
     /**
      * Output all local references (CIDs of all blocks in the blockstore)
      */
-    local(): AsyncIterable<RefsResultObject>
+    local(options?: CancellableOptions): AsyncIterable<RefsResultObject>
 }

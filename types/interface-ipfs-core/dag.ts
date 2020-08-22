@@ -1,7 +1,8 @@
 
 import CID from 'cids'
+import { CancellableOptions } from "./common"
 
-export interface DagPutOptions {
+export interface DagPutOptions extends CancellableOptions {
     /**
      * The IPLD format multicodec
      * @default "dag-cbor"
@@ -26,7 +27,7 @@ export interface DagPutOptions {
     pin?: boolean;
 }
 
-export interface DagGetOptions {
+export interface DagGetOptions extends CancellableOptions {
     /**
      * if set to true, it will avoid resolving through different objects.
      */
@@ -45,7 +46,7 @@ export interface DagGetResultObject {
     remainderPath: string;
 }
 
-export interface DagTreeOptions {
+export interface DagTreeOptions extends CancellableOptions {
     /**
      * if set to true, it will follow the links and continuously run tree on them, returning all the paths in the graph.
      */

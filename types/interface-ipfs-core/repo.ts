@@ -1,8 +1,9 @@
 
 import CID from "cids"
 import BigNumber from "bignumber.js"
+import { CancellableOptions } from "./common"
 
-export interface RepoGCOptions {
+export interface RepoGCOptions extends CancellableOptions {
     /**
      * writes a minimal output
      */
@@ -26,7 +27,7 @@ export interface RepoGCResultObject {
     cid?: CID;
 }
 
-export interface RepoStatOptions {
+export interface RepoStatOptions extends CancellableOptions {
     /**
      * output repoSize in MiB.
      */
@@ -65,5 +66,5 @@ export interface RepoAPI {
     /**
      * Show the repo version.
      */
-    version(): Promise<string>
+    version(options?: CancellableOptions): Promise<string>
 }

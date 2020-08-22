@@ -1,5 +1,6 @@
 
 import Multiaddr from "multiaddr"
+import { CancellableOptions } from "./common"
 
 export interface IdResultObject {
     /**
@@ -28,7 +29,7 @@ export interface IdResultObject {
     protocolVersion?: string
 }
 
-export interface DNSOptions {
+export interface DNSOptions extends CancellableOptions {
     /**
      * resolve until result is not a domain name
      * @default true
@@ -36,7 +37,7 @@ export interface DNSOptions {
     recursive?: boolean;
 }
 
-export interface PingOptions {
+export interface PingOptions extends CancellableOptions {
     /**
      * the number of ping messages to send
      * @type integer
@@ -51,7 +52,7 @@ export interface PingResponse {
     text: "" | string;
 }
 
-export interface ResolveOptions {
+export interface ResolveOptions extends CancellableOptions {
     /**
      * Resolve until the result is an IPFS name
      * @default false
@@ -68,12 +69,12 @@ export interface MiscellaneousAPI {
     /**
      * Returns the identity of the Peer
      */
-    id(): Promise<IdResultObject>;
+    id(options?: CancellableOptions): Promise<IdResultObject>;
 
     /**
      * An object with the version of the implementation, the commit and the Repo
      */
-    version(): Promise<any>;
+    version(options?: CancellableOptions): Promise<any>;
 
     /**
      * Resolve DNS links
@@ -87,7 +88,7 @@ export interface MiscellaneousAPI {
      * Stops the IPFS node and in case of talking with an IPFS Daemon, it stops the process.
      * @returns If action is successfully completed. Otherwise an error will be thrown
      */
-    stop(): Promise<void>
+    stop(options?: CancellableOptions): Promise<void>
 
     /**
      * Send echo request packets to IPFS hosts

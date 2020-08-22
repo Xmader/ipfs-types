@@ -3,7 +3,7 @@
 
 import CID from 'cids'
 import BufferList from 'bl'
-import { Bytes, Bloby, FileContent, UnixTime, MTime, IPFSPath } from "./common"
+import { Bytes, Bloby, FileContent, UnixTime, MTime, IPFSPath, CancellableOptions } from "./common"
 
 export interface FileObject {
     /** The path you want to the file to be accessible at from the root CID _after_ it has been added */
@@ -16,7 +16,7 @@ export interface FileObject {
     mtime?: UnixTime;
 }
 
-export interface IPFSAddOptions {
+export interface IPFSAddOptions extends CancellableOptions {
     /** 
      * chunking algorithm used to build ipfs DAGs. Available formats:
      * - size-{size}
@@ -95,7 +95,7 @@ export interface IPFSAddResultObject {
     size: number;
 }
 
-export interface IPFSCatOptions {
+export interface IPFSCatOptions extends CancellableOptions {
     offset?: number;
     length?: number;
 }
@@ -141,12 +141,12 @@ export interface RegularFilesAPI {
     /**
      * Fetch a file or an entire directory tree from IPFS that is addressed by a valid IPFS Path.
      */
-    get(ipfsPath: IPFSPath): AsyncIterable<IPFSGetResultObject>
+    get(ipfsPath: IPFSPath, options?: CancellableOptions): AsyncIterable<IPFSGetResultObject>
 
     /**
      * Lists a directory from IPFS that is addressed by a valid IPFS Path.
      */
-    ls(ipfsPath: IPFSPath): AsyncIterable<IPFSLsResultObject>
+    ls(ipfsPath: IPFSPath, options?: CancellableOptions): AsyncIterable<IPFSLsResultObject>
 }
 
 /**

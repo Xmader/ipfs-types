@@ -1,5 +1,7 @@
 
-export interface NamePublishOptions {
+import { CancellableOptions } from "./common"
+
+export interface NamePublishOptions extends CancellableOptions {
     /**
      * Resolve given path before publishing.
      * @default true
@@ -43,7 +45,7 @@ export interface NamePublishResultObject {
     value: string;
 }
 
-export interface NameResolveOptions {
+export interface NameResolveOptions extends CancellableOptions {
     /**
      * Resolve until the result is not an IPNS name
      * @default false
@@ -62,19 +64,19 @@ export interface NamePubsubAPI {
      * Cancel a name subscription.
      * @param arg the name of the subscription to cancel.
      */
-    cancel(arg: string): Promise<{ canceled: boolean; }>
+    cancel(arg: string, options?: CancellableOptions): Promise<{ canceled: boolean; }>
 
     /**
      * Query the state of IPNS pubsub.
      */
-    state(): Promise<{ enabled: boolean; }>
+    state(options?: CancellableOptions): Promise<{ enabled: boolean; }>
 
     /**
      * Show current name subscriptions.
      * @returns An array of subscriptions (ipns names)
      * @example ["/ipns/QmQrX8hka2BtNHa8N8arAq16TCVx5qHcb46c5yPewRycLm"]
      */
-    subs(): Promise<string[]>
+    subs(options?: CancellableOptions): Promise<string[]>
 }
 
 export interface NameAPI {

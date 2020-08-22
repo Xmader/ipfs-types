@@ -1,24 +1,18 @@
 
 import CID from 'cids'
+import { CancellableOptions } from "./common"
 
 type PinType = "recursive" | "direct" | "indirect"
 
-export interface PinAddOptions {
+export interface PinAddOptions extends CancellableOptions {
     /**
      * Recursively pin the object linked.
      * @default true
      */
     recursive?: boolean;
-
-    /**
-     * Throw an error if the request does not complete within the specified milliseconds timeout.  
-     * If `timeout` is a string, the value is parsed as a human readable duration.  
-     * There is no timeout by default.
-     */
-    timeout?: string | number;
 }
 
-export interface PinLsOptions {
+export interface PinLsOptions extends CancellableOptions {
     /**
      * filter by this type of pin
      */
@@ -37,7 +31,7 @@ export interface PinLsResultObject {
     type: PinType;
 }
 
-export interface PinRmOptions {
+export interface PinRmOptions extends CancellableOptions {
     /**
      * Recursively unpin the object linked.
      * @default true
