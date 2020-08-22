@@ -72,7 +72,8 @@ export interface MiscellaneousAPI {
     id(options?: CancellableOptions): Promise<IdResultObject>;
 
     /**
-     * An object with the version of the implementation, the commit and the Repo
+     * Returns the implementation version
+     * @returns An object with the version of the implementation, the commit and the Repo. `js-ipfs` instances will also return the version of `interface-ipfs-core` and `ipfs-http-client` supported by this node
      */
     version(options?: CancellableOptions): Promise<any>;
 

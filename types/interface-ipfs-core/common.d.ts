@@ -1,14 +1,25 @@
 
 import CID from 'cids'
 
-export type TypedArray = Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Uint8ClampedArray | Float32Array | Float64Array
-export type Bytes = Buffer | ArrayBuffer | TypedArray
-export type Bloby = Blob | File
+interface UnixTimeObj {
+    /**
+     * the number of seconds since (positive) or before (negative) the Unix Epoch began
+     */
+    secs: number;
 
-export type FileContent = Bytes | Bloby | string | Iterable<number> | Iterable<Bytes> | AsyncIterable<Bytes>
+    /**
+     * the number of nanoseconds since the last full second.
+     */
+    nsecs?: number;
+}
 
-export type UnixTime = Date | { secs: number, nsecs?: number } | number[]
-export type MTime = { secs: number, nsecs: number }
+/**
+ * As an array of numbers, it must have two elements, as per the output of [`process.hrtime()`](https://nodejs.org/dist/latest/docs/api/process.html#process_process_hrtime_time).
+ */
+type UnixTimeArr = [number, number]
+
+export type UnixTime = Date | UnixTimeObj | UnixTimeArr
+export type MTime = Required<UnixTimeObj>
 
 export type IPFSPath = string | CID | Buffer
 

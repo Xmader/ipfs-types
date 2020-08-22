@@ -29,6 +29,11 @@ export interface DagPutOptions extends CancellableOptions {
 
 export interface DagGetOptions extends CancellableOptions {
     /**
+     * An optional path within the DAG to resolve
+     */
+    path?: string;
+
+    /**
      * if set to true, it will avoid resolving through different objects.
      */
     localResolve?: boolean;
@@ -48,9 +53,21 @@ export interface DagGetResultObject {
 
 export interface DagTreeOptions extends CancellableOptions {
     /**
+     * An optional path within the DAG to resolve
+     */
+    path?: string;
+
+    /**
      * if set to true, it will follow the links and continuously run tree on them, returning all the paths in the graph.
      */
     recursive?: boolean;
+}
+
+export interface DagResolveOptions extends CancellableOptions {
+    /**
+     * If `ipfsPath` is a CID, you may pass a path here
+     */
+    path?: string;
 }
 
 /**
@@ -66,18 +83,24 @@ export interface DagAPI {
 
     /**
      * Retrieve an IPLD format node
-     * @param cid a CID instance, or a CID in its String format, or a CID in its String format concatenated with the path to be resolved
-     * @param path the path to be resolved.
+     * @param cid A DAG node that follows one of the supported IPLD formats
      * @param options 
      */
-    get(cid: CID | string, path?: string, options?: DagGetOptions): Promise<DagGetResultObject>
+    get(cid: CID, options?: DagGetOptions): Promise<DagGetResultObject>
 
     /**
      * Enumerate all the entries in a graph
-     * @param cid a CID instance, or a CID in its String format, or a CID in its String format concatenated with the path to be resolved
-     * @param path the path to be resolved.
+     * @param cid A DAG node that follows one of the supported IPLD formats
      * @param options 
      * @returns An array with the paths passed
      */
-    tree(cid: CID | string, path?: string, options?: DagTreeOptions): Promise<Array<string>>
+    tree(cid: CID, options?: DagTreeOptions): Promise<Array<string>>
+
+    /**
+     * Returns the CID and remaining path of the node at the end of the passed IPFS path
+     * @param ipfsPath  An IPFS path, e.g. `/ipfs/bafy/dir/file.txt` or a CID instance
+     * @param options 
+     * @returns  The last CID encountered during the traversal and the path to the end of the IPFS path inside the node referenced by the CID
+     */
+    resolve(ipfsPath: string | CID, options?: DagResolveOptions): Promise<{ cid: CID, remainderPath: string }>
 }

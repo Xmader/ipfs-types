@@ -3,7 +3,9 @@
 
 import CID from 'cids'
 import BufferList from 'bl'
-import { Bytes, Bloby, FileContent, UnixTime, MTime, IPFSPath, CancellableOptions } from "./common"
+import { UnixTime, MTime, IPFSPath, CancellableOptions } from "./common"
+
+export type FileContent = Uint8Array | Blob | string | Iterable<Uint8Array | Number> | AsyncIterable<Uint8Array> | ReadableStream<Uint8Array>
 
 export interface FileObject {
     /** The path you want to the file to be accessible at from the root CID _after_ it has been added */
@@ -15,6 +17,11 @@ export interface FileObject {
     /** The modification time of the entry (see below for definition) */
     mtime?: UnixTime;
 }
+
+/**
+ * `FileStream` is a stream of [FileContent](#L8) or [FileObject](#L10) entries of the type:
+ */
+export type FileStream = Iterable<FileContent | FileObject> | AsyncIterable<FileContent | FileObject> | ReadableStream<FileContent | FileObject>
 
 export interface IPFSAddOptions extends CancellableOptions {
     /** 
@@ -28,15 +35,10 @@ export interface IPFSAddOptions extends CancellableOptions {
     chunker?: string | "size-262144";
 
     /**
-     * the CID version to use when storing the data (storage keys are based on the CID, including its version).
+     * the CID version to use when storing the data
      * @default 0
      */
     cidVersion?: number;
-
-    /**
-     * allows to create directories with an unlimited number of entries currently size of unixfs directories is limited by the maximum block size. Note that this is an experimental feature.
-     */
-    enableShardingExperiment?: boolean;
 
     /**
      * multihash hashing algorithm to use.
@@ -45,7 +47,7 @@ export interface IPFSAddOptions extends CancellableOptions {
     hashAlg?: string | "sha2-256";
 
     /**
-     * doesn't actually add the file to IPFS, but rather calculates its hash.
+     * If true, will not add blocks to the blockstore
      * @default false
      */
     onlyHash?: boolean;
@@ -68,26 +70,34 @@ export interface IPFSAddOptions extends CancellableOptions {
     rawLeaves?: boolean;
 
     /**
-     * specifies the maximum size of unsharded directory that can be generated.
-     * @type integer
-     * @default 1000
-     */
-    shardSplitThreshold?: number;
-
-    /**
-     * if true will use the trickle DAG format for DAG generation.
+     * if true will use the [trickle DAG](https://godoc.org/github.com/ipsn/go-ipfs/gxlibs/github.com/ipfs/go-unixfs/importer/trickle) format for DAG generation.
      * @default false
      */
     trickle?: boolean;
 
     /**
-     * adds a wrapping node around the content.
+     * Adds a wrapping node around the content.
      * @default false
      */
     wrapWithDirectory?: boolean;
 }
 
-export interface IPFSAddResultObject {
+export interface IPFSAddAllOptions extends IPFSAddOptions {
+    /**
+     * allows to create directories with an unlimited number of entries currently size of unixfs directories is limited by the maximum block size. Note that this is an experimental feature
+     * @default false
+     */
+    enableShardingExperiment?: boolean;
+
+    /**
+     * Directories with more than this number of files will be created as HAMT-sharded directories
+     * @type integer
+     * @default 1000
+     */
+    shardSplitThreshold?: number;
+}
+
+export interface UnixFSEntry {
     path: string;
     cid: CID;
     mode: number;
@@ -121,14 +131,21 @@ export interface IPFSLsResultObject {
 export interface RegularFilesAPI {
 
     /**
-     * Import files and data into IPFS.
+     * Import a file or data into IPFS.
      */
     add(
-        data: Bytes | Bloby | string | FileObject
-            | Iterable<number> | Iterable<Bytes> | Iterable<Bloby> | Iterable<string> | Iterable<FileObject>
-            | AsyncIterable<Bytes> | AsyncIterable<Bloby> | AsyncIterable<string> | AsyncIterable<FileObject>,
+        data: FileContent | FileObject,
         options?: IPFSAddOptions
-    ): AsyncIterable<IPFSAddResultObject>;
+    ): Promise<UnixFSEntry>
+
+    /**
+     * Import multiple files and data into IPFS.
+     * @returns An async iterable that yields objects describing the added data
+     */
+    addAll(
+        source: FileStream,
+        options?: IPFSAddAllOptions
+    ): AsyncIterable<UnixFSEntry>
 
     /**
      * Returns a file addressed by a valid IPFS Path.

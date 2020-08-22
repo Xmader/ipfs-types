@@ -14,6 +14,11 @@ export interface PinAddOptions extends CancellableOptions {
 
 export interface PinLsOptions extends CancellableOptions {
     /**
+     *  CIDs or IPFS paths to search for in the pinset
+     */
+    paths?: CID | string | (CID | string)[];
+
+    /**
      * filter by this type of pin
      */
     type?: PinType;
@@ -51,10 +56,9 @@ export interface PinAPI {
 
     /**
      * List all the objects pinned to local storage or under a specific hash.
-     * @param cid a CID instance or CID as a string or an array of CIDs.
      * @param options 
      */
-    ls(cid?: CID | string | (CID | string)[], options?: PinLsOptions): AsyncIterable<PinLsResultObject>
+    ls(options?: PinLsOptions): AsyncIterable<PinLsResultObject>
 
     /**
      * Remove a hash from the pinset
