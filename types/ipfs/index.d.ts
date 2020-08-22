@@ -1,4 +1,4 @@
-// Type definitions for ipfs 0.41
+// Type definitions for ipfs 0.49
 // Project: https://js.ipfs.io
 // Definitions by: Xmader <https://github.com/Xmader>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
