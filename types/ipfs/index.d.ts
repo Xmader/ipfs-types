@@ -7,6 +7,7 @@ import Repo from "ipfs-repo"
 import PeerId from "peer-id"
 
 import IPFSCoreAPIs from "../interface-ipfs-core"
+import { KeyType } from "../interface-ipfs-core/common"
 
 export as namespace ipfs
 
@@ -154,7 +155,13 @@ export interface InitializationOptions {
     emptyRepo?: boolean;
 
     /**
-     * Number of bits to use in the generated key pair.
+     * The type of key to use. Supports `rsa`, `ed25519`, `secp256k1`.
+     * @default "rsa"
+     */
+    algorithm?: KeyType;
+
+    /**
+     * Number of bits to use in the generated key pair. (rsa only)
      * @default 2048
      */
     bits?: number;

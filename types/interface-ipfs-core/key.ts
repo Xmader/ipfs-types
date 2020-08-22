@@ -1,12 +1,12 @@
 
-import { CancellableOptions } from "./common"
+import { CancellableOptions, KeyType } from "./common"
 
 export interface KeyGenOptions extends CancellableOptions {
     /**
      * the key type  
-     * Note: js-ipfs will not support 'ed25519' until libp2p/js-libp2p-crypto#145 is resolved
+     * @default "rsa"
      */
-    type?: "rsa" | "ed25519";
+    type?: KeyType;
 
     /**
      * the key size in bits

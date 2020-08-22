@@ -38,3 +38,5 @@ export interface CancellableOptions {
      */
     signal?: AbortSignal;
 }
+
+export type KeyType = "rsa" | "ed25519" | "secp256k1"
